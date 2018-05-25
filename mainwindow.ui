@@ -331,99 +331,11 @@
          </layout>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>Subtotal do caixa (soma dos valores acima)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_21">
-            <property name="text">
-             <string>Retiradas ou depósitos no período</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_22">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_23">
-            <property name="text">
-             <string>Total no caixa hoje</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_24">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_27">
-            <property name="text">
-             <string>Vendas em dinheiro deste período</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="label_28">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0">
-           <widget class="QLabel" name="label_25">
-            <property name="text">
-             <string>Vendas em dinheiro do período anterior</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLabel" name="label_26">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="label_29">
-            <property name="text">
-             <string>Diferença no caixa deste período</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="1">
-           <widget class="QLabel" name="label_30">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_31">
-            <property name="text">
-             <string>Resumo</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_24">
+          <property name="text">
+           <string>Retiradas e depósitos no perído</string>
+          </property>
+         </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -465,12 +377,12 @@
             </column>
             <column>
              <property name="text">
-              <string>Descrição</string>
+              <string>Valor</string>
              </property>
             </column>
             <column>
              <property name="text">
-              <string>Valor</string>
+              <string>Descrição</string>
              </property>
             </column>
            </widget>
@@ -479,6 +391,128 @@
            <widget class="QToolButton" name="toolButton">
             <property name="text">
              <string>+</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="7" column="1">
+           <widget class="QLabel" name="diferencaCaixaDestePeriodo">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="retiradasPeriodo">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>Saldo de retiradas e depósitos</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="label_29">
+            <property name="text">
+             <string>Total esperado no caixa</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLabel" name="vendasDinheiroPeriodo">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>Contagem de cédulas e moedas no caixa</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_27">
+            <property name="text">
+             <string>Vendas em dinheiro do período anterior</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="label_25">
+            <property name="text">
+             <string>Vendas em dinheiro deste período</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="totalCaixaPeriodo">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="subtotalCaixa">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLabel" name="vendasDinheiroPeriodoAnterior">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_31">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Contagem do caixa</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>Apuração do caixa</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_23">
+            <property name="text">
+             <string>Total no caixa no periodo</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="label_28">
+            <property name="text">
+             <string>Diferença no caixa</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QLabel" name="label_30">
+            <property name="text">
+             <string>R$ 0,00</string>
             </property>
            </widget>
           </item>
@@ -503,6 +537,168 @@
        <attribute name="title">
         <string>Cartões</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Totais do período</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidget_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
+          </property>
+          <row>
+           <property name="text">
+            <string>POS</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>TEF</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Totais</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Mastercard</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Maestro</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Visa</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Visa Electron</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>AMEX</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>ELO</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Diners/Hipercard</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Visa 2x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Visa 3x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Mastercard 2x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Mastercard 3x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>AMEX 2x</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>AMEX3x</string>
+           </property>
+          </column>
+          <item row="0" column="1">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidget_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <column>
+           <property name="text">
+            <string>Bandeira</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Modalidade</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Valor</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>AUTO</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>AUTE</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>Conferência</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Observações</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
