@@ -39,7 +39,14 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Salvar</string>
+         <string>Salvar para concluiur mais tarde</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Concluir a verificação</string>
         </property>
        </widget>
       </item>
