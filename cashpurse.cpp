@@ -2,12 +2,12 @@
 
 CashPurse::CashPurse(QObject *parent) : QObject(parent)
 {
-
+    total = 0.0;
 }
 
 void CashPurse::updateTotal()
 {
-    total = bills2 * 2 + bills5 * 5 + bills10 * 10 + bills20 * 20 + bills50 * 50 + bills100 * 100
+    total = bills2 * 2.0 + bills5 * 5.0 + bills10 * 10.0 + bills20 * 20.0 + bills50 * 50.0 + bills100 * 100.0
             + cents1 * 0.01 + cents5 * 0.05 + cents10 * 0.1 + cents25 * 0.25 + cents50 * 0.5 + cents100;
 
     emit totalChanged(total);
