@@ -39,7 +39,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Salvar para concluiur mais tarde</string>
+         <string>Salvar para concluir mais tarde</string>
         </property>
        </widget>
       </item>

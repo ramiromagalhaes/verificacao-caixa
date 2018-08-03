@@ -25,9 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cashpurse.cpp
+    cashpurse.cpp \
+    relfechacaixa.cpp
 
 HEADERS  += mainwindow.h \
-    cashpurse.h
+    cashpurse.h \
+    relfechacaixa.h
 
 FORMS    += mainwindow.ui
