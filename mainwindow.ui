@@ -406,7 +406,7 @@
         <item>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="7" column="1">
-           <widget class="QLabel" name="diferencaCaixaDestePeriodo">
+           <widget class="QLabel" name="caixaEsperado">
             <property name="text">
              <string>R$ 0,00</string>
             </property>
@@ -434,7 +434,7 @@
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QLabel" name="vendasDinheiroPeriodo">
+           <widget class="QLabel" name="vendasDinheiroPeriodoAnterior">
             <property name="text">
              <string>R$ 0,00</string>
             </property>
@@ -450,7 +450,7 @@
           <item row="5" column="0">
            <widget class="QLabel" name="label_27">
             <property name="text">
-             <string>Vendas em dinheiro do período anterior</string>
+             <string>Dinheiro no caixa no início do período anterior</string>
             </property>
            </widget>
           </item>
@@ -476,7 +476,7 @@
            </widget>
           </item>
           <item row="6" column="1">
-           <widget class="QLabel" name="vendasDinheiroPeriodoAnterior">
+           <widget class="QLabel" name="vendasDinheiroPeriodo">
             <property name="text">
              <string>R$ 0,00</string>
             </property>
@@ -517,7 +517,7 @@
            </widget>
           </item>
           <item row="8" column="1">
-           <widget class="QLabel" name="label_30">
+           <widget class="QLabel" name="diferencaCaixa">
             <property name="text">
              <string>R$ 0,00</string>
             </property>

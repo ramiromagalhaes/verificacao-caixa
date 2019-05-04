@@ -5,6 +5,11 @@ CashPurse::CashPurse(QObject *parent) : QObject(parent)
     total = 0.0;
 }
 
+double CashPurse::getTotal()
+{
+    return total;
+}
+
 void CashPurse::updateTotal()
 {
     total = bills2 * 2.0 + bills5 * 5.0 + bills10 * 10.0 + bills20 * 20.0 + bills50 * 50.0 + bills100 * 100.0
