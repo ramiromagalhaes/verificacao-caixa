@@ -1,6 +1,14 @@
 #include "mainwindow.h"
 #include <QApplication>
 
+#include "relfechacaixa.h"
+
+void initData() {
+    RelFechaCaixa relatorio;
+
+    relatorio.load();
+}
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

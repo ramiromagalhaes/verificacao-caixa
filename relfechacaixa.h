@@ -20,6 +20,8 @@ public:
     double expectedCash();
     double cashDifference();
 
+    void load();
+
 private:
     int identifier; //id do período
 
