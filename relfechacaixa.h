@@ -13,14 +13,17 @@ class RelFechaCaixa
 public:
     RelFechaCaixa();
 
-    double totalCash();
-    double totalCashMovement();
-    double totalSales();
-    double previousPeriodCash();
-    double expectedCash();
-    double cashDifference();
+    double totalCash() const;
+    double totalCashMovement() const;
+    double totalSales() const;
+    double previousPeriodCash() const;
+    double expectedCash() const;
+    double cashDifference() const;
 
     void load();
+
+    void addMovement(CashMovement const &movement);
+    void addTotalCardSales(TotalCardSales const &cardSales);
 
 private:
     int identifier; //id do período
@@ -30,15 +33,15 @@ private:
 
     QString cashier; //responsável
 
-    CashPurse cash; //dinheiro no caixa e total no caixa do período
+    CashPurse cash; //dinheiro no caixa
     std::vector<CashMovement> movements; //depósitos e retiradas (reforços e sangrias) do caixa
 
     //período anterior
     double previous_period_cash; //total de dinheiro no período anterior
     double total_sales; //vendas em dinheiro neste período
 
-    //total esperado no caixa = previsous_period_sales + total_sales
-    //diferença no caixa = previsous_period_sales + total_sales - cash.total()
+    //total esperado no caixa = previous_period_sales + total_sales
+    //diferença no caixa = previous_period_sales + total_sales - cash
 
     //vendas em cartões
     std::vector<TotalCardSales> cards;

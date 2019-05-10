@@ -5,9 +5,16 @@ CashPurse::CashPurse(QObject *parent) : QObject(parent)
     total = 0.0;
 }
 
-double CashPurse::getTotal()
+double CashPurse::getTotal() const
 {
     return total;
+}
+
+void CashPurse::load()
+{
+    set50Bills(10);
+    set20Bills(5);
+    set10Bills(10);
 }
 
 void CashPurse::updateTotal()

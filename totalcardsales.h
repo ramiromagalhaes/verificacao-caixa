@@ -5,8 +5,6 @@
 class TotalCardSales
 {
 public:
-    TotalCardSales();
-
     enum FlagAndMode {
         Mastercard = 0,
         Maestro = 1,
@@ -27,6 +25,10 @@ public:
         POS = 0,
         TEF = 1
     };
+
+    TotalCardSales(const FlagAndMode fm, const Machine m, const double total);
+
+    TotalCardSales & operator=(TotalCardSales const & cardSales);
 
 private:
     FlagAndMode fm;

@@ -2,21 +2,25 @@
 #define CASHMOVEMENT_H
 
 #include <QString>
+#include <QTime>
 
 class CashMovement
 {
 public:
-    CashMovement();
-
     enum Flow {
         inward = 1,
         outward = -1
     };
 
+    CashMovement(QString description, QTime when, double amount, Flow f);
+
     double value() const;
+
+    CashMovement & operator=(CashMovement const & movement);
 
 private:
     QString description;
+    QTime when;
     double amount;
     Flow f;
 };

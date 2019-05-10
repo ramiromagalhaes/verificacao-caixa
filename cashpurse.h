@@ -9,7 +9,9 @@ class CashPurse : public QObject
 public:
     explicit CashPurse(QObject *parent = 0);
 
-    double getTotal();
+    double getTotal() const;
+
+    void load();
 
 signals:
     void totalChanged(double total);
