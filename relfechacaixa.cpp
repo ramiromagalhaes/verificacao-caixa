@@ -1,46 +1,5 @@
 #include "relfechacaixa.h"
 
-RelFechaCaixa::RelFechaCaixa()
-{
-
-}
-
-double RelFechaCaixa::totalCash() const
-{
-    return cash.getTotal();
-}
-
-double RelFechaCaixa::totalCashMovement() const
-{
-    double total = .0;
-
-    for(std::vector<CashMovement>::const_iterator it = movements.begin(); it != movements.end(); ++it) {
-        total += it->value();
-    }
-
-    return total;
-}
-
-double RelFechaCaixa::totalSales() const
-{
-    return total_sales;
-}
-
-double RelFechaCaixa::previousPeriodCash() const
-{
-    return previous_period_cash;
-}
-
-double RelFechaCaixa::expectedCash() const
-{
-    return previous_period_cash + total_sales - totalCashMovement();
-}
-
-double RelFechaCaixa::cashDifference() const
-{
-    return expectedCash() - totalCash();
-}
-
 void RelFechaCaixa::load()
 {
     identifier = 1;
@@ -69,12 +28,4 @@ void RelFechaCaixa::load()
     cards.push_back( TotalCardSales(TotalCardSales::FlagAndMode::Maestro, TotalCardSales::Machine::TEF, 100.0) );
 
     notes = QString("Foi tudo bem nesse período. Nada de especial a comentar.");
-}
-
-void RelFechaCaixa::addMovement(CashMovement const &movement) {
-    movements.push_back( movement );
-}
-
-void RelFechaCaixa::addTotalCardSales(TotalCardSales const &cardSales){
-    cards.push_back( cardSales );
 }

@@ -44,7 +44,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="finishButton">
         <property name="text">
          <string>Concluir a verificação</string>
         </property>
@@ -169,7 +169,11 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="spinR2"/>
+           <widget class="QSpinBox" name="spinR2">
+            <property name="maximum">
+             <number>99</number>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QSpinBox" name="spinR5"/>
@@ -190,6 +194,9 @@
            <widget class="QLabel" name="labelTotalBills">
             <property name="text">
              <string>R$ 0,00</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
             </property>
            </widget>
           </item>
@@ -298,27 +305,54 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QSpinBox" name="spinR001"/>
+           <widget class="QSpinBox" name="spinR001">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2">
-           <widget class="QSpinBox" name="spinR005"/>
+           <widget class="QSpinBox" name="spinR005">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="3">
-           <widget class="QSpinBox" name="spinR010"/>
+           <widget class="QSpinBox" name="spinR010">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="4">
-           <widget class="QSpinBox" name="spinR025"/>
+           <widget class="QSpinBox" name="spinR025">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="5">
-           <widget class="QSpinBox" name="spinR050"/>
+           <widget class="QSpinBox" name="spinR050">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="6">
-           <widget class="QSpinBox" name="spinR1"/>
+           <widget class="QSpinBox" name="spinR1">
+            <property name="maximum">
+             <number>999</number>
+            </property>
+           </widget>
           </item>
           <item row="3" column="7">
            <widget class="QLabel" name="labelTotalCoins">
             <property name="text">
              <string>R$ 0,00</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
             </property>
            </widget>
           </item>
@@ -347,7 +381,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTableWidget" name="tableWidget">
+           <widget class="QTableWidget" name="tableDepositOrWithdraw">
             <property name="gridStyle">
              <enum>Qt::SolidLine</enum>
             </property>
@@ -392,6 +426,13 @@
               <string>Descrição</string>
              </property>
             </column>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="subtotalCaixa">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
            </widget>
           </item>
           <item alignment="Qt::AlignTop">
@@ -468,13 +509,6 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="subtotalCaixa">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
           <item row="6" column="1">
            <widget class="QLabel" name="vendasDinheiroPeriodo">
             <property name="text">
@@ -523,20 +557,14 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="labelTotalCash">
+            <property name="text">
+             <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
          </layout>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </widget>
@@ -553,7 +581,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget_2">
+         <widget class="QTableWidget" name="tableCardsReport">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -661,7 +689,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget_3">
+         <widget class="QTableWidget" name="tablePosAudit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -695,13 +723,6 @@
           </column>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="label_22">
-          <property name="text">
-           <string>Conferência</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_3">
@@ -710,7 +731,7 @@
        </attribute>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPlainTextEdit" name="plainTextEdit"/>
+         <widget class="QPlainTextEdit" name="textboxNotes"/>
         </item>
        </layout>
       </widget>
@@ -751,6 +772,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>tabWidget</tabstop>
   <tabstop>spinR2</tabstop>
   <tabstop>spinR5</tabstop>
   <tabstop>spinR10</tabstop>
@@ -763,10 +785,221 @@
   <tabstop>spinR025</tabstop>
   <tabstop>spinR050</tabstop>
   <tabstop>spinR1</tabstop>
+  <tabstop>tableDepositOrWithdraw</tabstop>
+  <tabstop>addDepositOrWithdraw</tabstop>
+  <tabstop>tableCardsReport</tabstop>
+  <tabstop>tablePosAudit</tabstop>
+  <tabstop>textboxNotes</tabstop>
+  <tabstop>saveButton</tabstop>
+  <tabstop>finishButton</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>spinR2</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR2Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>562</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>977</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR5</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR5Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>637</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>978</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR10</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR10Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>694</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>975</x>
+     <y>120</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR20</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR20Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>741</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>972</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR50</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR50Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>804</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>974</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR100</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR100Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>874</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>972</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR001</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR001Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>587</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>974</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR005</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR005Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>610</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>972</x>
+     <y>284</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR010</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR010Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>709</x>
+     <y>204</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>973</x>
+     <y>328</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR025</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR025Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>762</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>974</x>
+     <y>359</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR050</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR050Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>816</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>974</x>
+     <y>399</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinR1</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spinR1Changed(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>886</x>
+     <y>206</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>973</x>
+     <y>472</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>spinR2Changed(int)</slot>
+  <slot>spinR5Changed(int)</slot>
+  <slot>spinR10Changed(int)</slot>
+  <slot>spinR20Changed(int)</slot>
+  <slot>spinR50Changed(int)</slot>
+  <slot>spinR100Changed(int)</slot>
+  <slot>spinR1Changed(int)</slot>
+  <slot>spinR050Changed(int)</slot>
+  <slot>spinR025Changed(int)</slot>
+  <slot>spinR010Changed(int)</slot>
+  <slot>spinR005Changed(int)</slot>
+  <slot>spinR001Changed(int)</slot>
  </slots>
 </ui>

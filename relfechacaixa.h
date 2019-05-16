@@ -11,44 +11,95 @@
 class RelFechaCaixa
 {
 public:
-    RelFechaCaixa();
+    RelFechaCaixa() {}
 
-    double totalCash() const;
-    double totalCashMovement() const;
-    double totalSales() const;
-    double previousPeriodCash() const;
-    double expectedCash() const;
-    double cashDifference() const;
+    int getId() const
+    {
+        return identifier;
+    }
 
     void load();
 
-    void addMovement(CashMovement const &movement);
-    void addTotalCardSales(TotalCardSales const &cardSales);
-
-private:
-    int identifier; //id do período
-
+    /**
+     * @brief period_init data e hora do início do período
+     */
     QDateTime period_init;
+
+    /**
+     * @brief period_end data e hora do dim do período
+     */
     QDateTime period_end;
 
-    QString cashier; //responsável
+    /**
+     * @brief cashier responsável pelo relatório
+     */
+    QString cashier;
 
-    CashPurse cash; //dinheiro no caixa
-    std::vector<CashMovement> movements; //depósitos e retiradas (reforços e sangrias) do caixa
+    /**
+     * @brief cash contagem de dinheiro no caixa
+     */
+    CashPurse cash;
 
-    //período anterior
-    double previous_period_cash; //total de dinheiro no período anterior
-    double total_sales; //vendas em dinheiro neste período
+    /**
+     * @brief movements depósitos e retiradas do caixa feitas no período
+     */
+    std::vector<CashMovement> movements;
 
-    //total esperado no caixa = previous_period_sales + total_sales
-    //diferença no caixa = previous_period_sales + total_sales - cash
+    /**
+     * @brief total_sales vendas em dinheiro neste período
+     */
+    double total_sales;
 
-    //vendas em cartões
+    /**
+     * @brief cards relatório de vendas em cartão
+     */
     std::vector<TotalCardSales> cards;
 
-    //conferências de papéis POS
+    //TODO conferências de papéis POS
 
+    /**
+     * @brief notes observações sobre o relatório realizado nesse período
+     */
     QString notes;
+
+    double totalCashMovement() const
+    {
+        double total = .0;
+
+        for(std::vector<CashMovement>::const_iterator it = movements.begin(); it != movements.end(); ++it) {
+            total += it->value();
+        }
+
+        return total;
+    }
+
+    double previousPeriodCash() const
+    {
+        return previous_period_cash;
+    }
+
+    double expectedCash() const
+    {
+        return previous_period_cash + total_sales - totalCashMovement();
+    }
+
+    double cashDifference() const
+    {
+        return expectedCash() - cash.getTotal();
+    }
+
+private:
+
+    /**
+     * @brief identifier id do período no banco de dados
+     */
+    int identifier;
+
+    /**
+     * @brief previous_period_cash total de dinheiro no caixa do período anterior
+     */
+    double previous_period_cash;
+
 };
 
 #endif // RELFECHACAIXA_H
