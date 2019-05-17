@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,19 +18,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateTotalBills()
 {
-    ui->labelTotalBills->setText( QString::number(model->cash.getTotalBills(), 'f', 2) );
+    ui->labelTotalBills->setText( QString::number(model->cash.getTotalBills(), 'f', 2).prepend("R$ ") );
     updateTotalCash();
 }
 
 void MainWindow::updateTotalCoins()
 {
-    ui->labelTotalCoins->setText( QString::number(model->cash.getTotalCoins(), 'f', 2) );
+    ui->labelTotalCoins->setText( QString::number(model->cash.getTotalCoins(), 'f', 2).prepend("R$ ") );
     updateTotalCash();
 }
 
 void MainWindow::updateTotalCash()
 {
-    ui->labelTotalCash->setText( QString::number(model->cash.getTotal(), 'f', 2) );
+    ui->subtotalCaixa->setText( QString::number(model->cash.getTotal(), 'f', 2).prepend("R$ ") );
 }
 
 void MainWindow::spinR2Changed(int v)
@@ -101,4 +103,40 @@ void MainWindow::spinR1Changed(int v)
 {
     model->cash.set100Cents(v);
     updateTotalCoins();
+}
+
+void MainWindow::handleAddCashMovent()
+{
+    for(std::vector<CashMovement>::const_iterator it = model->movements.begin(); it != model->movements.end(); ++it) {
+        qDebug() << it->when << '\t' << it->description << '\t' << it->amount << '\t' << it->f;
+    }
+}
+
+void MainWindow::handleRemoveCashMovent()
+{
+    if ( !model->movements.empty() )
+    {
+        model->movements.pop_back();
+        qDebug() << '\n';
+    }
+}
+
+void MainWindow::handleSave()
+{
+    qDebug() << "save";
+}
+
+void MainWindow::handleFinish()
+{
+    qDebug() << "finish";
+}
+
+void MainWindow::handleCardReportChanged(int x,int y)
+{
+    qDebug() << "item at" << x << ' ' << y;
+}
+
+void MainWindow::handleNotesChanged()
+{
+    model->notes = ui->txtNotes->toPlainText();
 }

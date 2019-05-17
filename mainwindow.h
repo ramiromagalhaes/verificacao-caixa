@@ -43,6 +43,15 @@ private slots:
     void spinR025Changed(int);
     void spinR050Changed(int);
     void spinR1Changed(int);
+
+    void handleAddCashMovent();
+    void handleRemoveCashMovent();
+
+    void handleCardReportChanged(int, int);
+    void handleNotesChanged();
+
+    void handleSave();
+    void handleFinish();
 };
 
 #endif // MAINWINDOW_H

@@ -18,7 +18,6 @@ public:
 
     CashMovement & operator=(CashMovement const & movement);
 
-private:
     QString description;
     QTime when;
     double amount;
