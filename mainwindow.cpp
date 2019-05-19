@@ -16,6 +16,45 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateView()
+{
+    ui->spinR2->setValue  ( model->cash.get2Bills()   );
+    ui->spinR5->setValue  ( model->cash.get5Bills()   );
+    ui->spinR10->setValue ( model->cash.get10Bills()  );
+    ui->spinR20->setValue ( model->cash.get20Bills()  );
+    ui->spinR50->setValue ( model->cash.get50Bills()  );
+    ui->spinR100->setValue( model->cash.get100Bills() );
+    ui->spinR001->setValue( model->cash.get1Cents()   );
+    ui->spinR005->setValue( model->cash.get5Cents()   );
+    ui->spinR010->setValue( model->cash.get10Cents()  );
+    ui->spinR025->setValue( model->cash.get25Cents()  );
+    ui->spinR050->setValue( model->cash.get50Cents()  );
+    ui->spinR1->setValue  ( model->cash.get100Cents() );
+
+    updateTotalBills();
+    updateTotalCoins();
+    updateTotalCash();
+
+    ui->totalMovimentos->setText              ( QString::number(model->totalCashMovement(), 'f', 2).prepend("R$ ")  );
+    ui->caixaPeriodoAnterior->setText( QString::number(model->previousPeriodCash(), 'f', 2).prepend("R$ ") );
+    ui->vendasDinheiroPeriodo->setText        ( QString::number(model->total_sales, 'f', 2).prepend("R$ ")          );
+    ui->caixaEsperado->setText                ( QString::number(model->expectedCash(), 'f', 2).prepend("R$ ")       );
+    ui->diferencaCaixa->setText               ( QString::number(model->cashDifference(), 'f', 2).prepend("R$ ")     );
+
+    for(std::vector<TotalCardSales>::const_iterator it = model->cards.begin(); it != model->cards.end(); ++it) {
+        ui->tableCardsReport
+                ->itemAt(it->fm, it->m)
+                    ;//->setText( QString::number(it->total, 'f', 2).prepend("R$ ") );
+    }
+
+    ui->txtNotes->setPlainText( model->notes );
+}
+
+void MainWindow::addCashMovent()
+{
+    //ui->tableDepositOrWithdraw;
+}
+
 void MainWindow::updateTotalBills()
 {
     ui->labelTotalBills->setText( QString::number(model->cash.getTotalBills(), 'f', 2).prepend("R$ ") );

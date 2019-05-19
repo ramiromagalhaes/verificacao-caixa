@@ -6,19 +6,19 @@ class TotalCardSales
 {
 public:
     enum FlagAndMode {
-        Mastercard = 0,
-        Maestro = 1,
-        Visa = 2,
-        Visa_Electron = 3,
-        Amex = 4,
-        Elo = 5,
-        Diners = 6,
-        Visa2x = 7,
-        Visa3x = 8,
-        Mastercard2x = 9,
-        Mastercard3x = 10,
-        Amex2x = 11,
-        Amex3x = 12
+        Mastercard = 1,
+        Maestro = 2,
+        Visa = 3,
+        Visa_Electron = 4,
+        Amex = 5,
+        Elo = 6,
+        Diners = 7,
+        Visa2x = 8,
+        Visa3x = 9,
+        Mastercard2x = 10,
+        Mastercard3x = 11,
+        Amex2x = 12,
+        Amex3x = 13
     };
 
     enum Machine {
@@ -30,7 +30,6 @@ public:
 
     TotalCardSales & operator=(TotalCardSales const & cardSales);
 
-private:
     FlagAndMode fm;
     Machine m;
     double total;

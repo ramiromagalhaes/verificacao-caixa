@@ -20,6 +20,10 @@ public:
         this->model = m;
     }
 
+    void updateView();
+
+    void addCashMovent();
+
 private:
     Ui::MainWindow *ui;
 

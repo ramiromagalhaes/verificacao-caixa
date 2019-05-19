@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.setModel(r);
+    w.updateView();
     w.show();
 
     return a.exec();
