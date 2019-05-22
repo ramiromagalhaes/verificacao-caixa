@@ -9,9 +9,9 @@ class DbServices
 public:
     DbServices();
 
-    std::vector<RelFechaCaixa> reports();
+    std::vector<RelFechaCaixa> * reports();
 
-    void save(RelFechaCaixa report);
+    void save(const RelFechaCaixa & report);
 
 };
 
