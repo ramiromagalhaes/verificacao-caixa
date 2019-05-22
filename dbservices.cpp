@@ -1,7 +1,9 @@
 #include "dbservices.h"
 
+#include <QDebug>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
 #include <QVariant>
 #include <QDateTime>
 #include <QTime>
@@ -22,8 +24,13 @@ std::vector<RelFechaCaixa> * DbServices::reports()
 
     if ( !db.open() )
     {
-        //qDebug() << sdb.lastError().text();
-        //TODO
+        qDebug() << db.lastError().text();
+    }
+    else
+    {
+        QSqlQuery query;
+        query.exec("SELECT * FROM CASHFLOW_REPORT");
+        qDebug() << "teste: " << query.size();
     }
 
     QSqlQuery query;
