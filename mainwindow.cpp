@@ -35,17 +35,25 @@ void MainWindow::updateView()
     updateTotalCoins();
     updateTotalCash();
 
-    ui->totalMovimentos->setText              ( QString::number(model->totalCashMovement(), 'f', 2).prepend("R$ ")  );
-    ui->caixaPeriodoAnterior->setText( QString::number(model->previousPeriodCash(), 'f', 2).prepend("R$ ") );
-    ui->vendasDinheiroPeriodo->setText        ( QString::number(model->total_sales, 'f', 2).prepend("R$ ")          );
-    ui->caixaEsperado->setText                ( QString::number(model->expectedCash(), 'f', 2).prepend("R$ ")       );
-    ui->diferencaCaixa->setText               ( QString::number(model->cashDifference(), 'f', 2).prepend("R$ ")     );
+    ui->totalMovimentos->setText       ( QString::number(model->totalCashMovement(), 'f', 2).prepend("R$ ")  );
+    ui->caixaPeriodoAnterior->setText  ( QString::number(model->previousPeriodCash(), 'f', 2).prepend("R$ ") );
+    ui->vendasDinheiroPeriodo->setText ( QString::number(model->total_sales, 'f', 2).prepend("R$ ")          );
+    ui->caixaEsperado->setText         ( QString::number(model->expectedCash(), 'f', 2).prepend("R$ ")       );
+    ui->diferencaCaixa->setText        ( QString::number(model->cashDifference(), 'f', 2).prepend("R$ ")     );
 
-    for(std::vector<TotalCardSales>::const_iterator it = model->cards.begin(); it != model->cards.end(); ++it) {
-        ui->tableCardsReport
-                ->itemAt(it->fm, it->m)
-                    ;//->setText( QString::number(it->total, 'f', 2).prepend("R$ ") );
+    updateCashMovements();
+
+    double cardsTotals[2] = {.0, .0};
+    for(std::vector<TotalCardSales>::const_iterator it = model->cards.begin(); it != model->cards.end(); ++it)
+    {
+        cardsTotals[it->m] += it->total;
+        ui->tableCardsReport->setItem(it->m, it->fm,
+                                        new QTableWidgetItem( QString::number(it->total, 'f', 2).prepend("R$ ") )
+                                     );
     }
+    ui->tableCardsReport->setItem(0, 0, new QTableWidgetItem( QString::number(cardsTotals[0], 'f', 2).prepend("R$ ") ));
+    ui->tableCardsReport->setItem(1, 0, new QTableWidgetItem( QString::number(cardsTotals[1], 'f', 2).prepend("R$ ") ));
+
 
     ui->txtNotes->setPlainText( model->notes );
 }
@@ -70,6 +78,22 @@ void MainWindow::updateTotalCoins()
 void MainWindow::updateTotalCash()
 {
     ui->subtotalCaixa->setText( QString::number(model->cash.getTotal(), 'f', 2).prepend("R$ ") );
+}
+
+void MainWindow::updateCashMovements()
+{
+    ui->tableDepositOrWithdraw->clearContents();
+
+    for(std::vector<CashMovement>::const_iterator it = model->movements.begin(); it != model->movements.end(); ++it)
+    {
+        ui->tableDepositOrWithdraw->insertRow(ui->tableDepositOrWithdraw->rowCount());
+
+        const int newRow = ui->tableDepositOrWithdraw->rowCount() - 1;
+        ui->tableDepositOrWithdraw->setItem(newRow, 0, new QTableWidgetItem( it->when.toString(Qt::TextDate) ));
+        ui->tableDepositOrWithdraw->setItem(newRow, 1, new QTableWidgetItem( it->responsible ));
+        ui->tableDepositOrWithdraw->setItem(newRow, 2, new QTableWidgetItem( QString::number(it->amount, 'f', 2).prepend("R$ ") ));
+        ui->tableDepositOrWithdraw->setItem(newRow, 3, new QTableWidgetItem( it->description ));
+    }
 }
 
 void MainWindow::spinR2Changed(int v)
@@ -146,18 +170,15 @@ void MainWindow::spinR1Changed(int v)
 
 void MainWindow::handleAddCashMovent()
 {
-    for(std::vector<CashMovement>::const_iterator it = model->movements.begin(); it != model->movements.end(); ++it) {
-        qDebug() << it->when << '\t' << it->description << '\t' << it->amount << '\t' << it->f;
-    }
+    model->movements.push_back( CashMovement(QTime::currentTime(), "", .0, CashMovement::Flow::inward, "") );
+    ui->tableDepositOrWithdraw->insertRow( ui->tableDepositOrWithdraw->rowCount() );
 }
 
 void MainWindow::handleRemoveCashMovent()
 {
-    if ( !model->movements.empty() )
-    {
-        model->movements.pop_back();
-        qDebug() << '\n';
-    }
+    qDebug() << ui->tableDepositOrWithdraw->selectedItems().at(0)->row();
+    model->movements.erase(model->movements.begin() + ui->tableDepositOrWithdraw->selectedItems().at(0)->row());
+    ui->tableDepositOrWithdraw->removeRow( ui->tableDepositOrWithdraw->selectedItems().at(0)->row() );
 }
 
 void MainWindow::handleSave()

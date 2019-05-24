@@ -5,7 +5,7 @@
 class TotalCardSales
 {
 public:
-    enum FlagAndMode {
+    enum FlagAndMode : int {
         Mastercard = 1,
         Maestro = 2,
         Visa = 3,
@@ -21,7 +21,7 @@ public:
         Amex3x = 13
     };
 
-    enum Machine {
+    enum Machine : int {
         POS = 0,
         TEF = 1
     };

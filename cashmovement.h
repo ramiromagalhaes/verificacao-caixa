@@ -7,21 +7,23 @@
 class CashMovement
 {
 public:
-    enum Flow {
+    enum Flow : int
+    {
         inward = 1,
         outward = -1
     };
 
-    CashMovement(QString description, QTime when, double amount, Flow f);
+    CashMovement(QTime when, QString responsible, double amount, Flow f, QString description);
 
     double value() const;
 
     CashMovement & operator=(CashMovement const & movement);
 
-    QString description;
     QTime when;
+    QString responsible;
     double amount;
     Flow f;
+    QString description;
 };
 
 #endif // CASHMOVEMENT_H

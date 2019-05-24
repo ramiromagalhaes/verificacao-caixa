@@ -32,6 +32,7 @@ private:
     void updateTotalBills();
     void updateTotalCoins();
     void updateTotalCash();
+    void updateCashMovements();
 
 private slots:
     void spinR2Changed(int);
