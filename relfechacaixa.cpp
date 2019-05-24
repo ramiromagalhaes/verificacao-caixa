@@ -12,10 +12,12 @@ void RelFechaCaixa::load()
     cash.load();
 
     movements.clear();
-    movements.push_back( CashMovement(QTime(11,00), "Pessoa a", 100.00, CashMovement::Flow::outward, "Retirada") );
-    movements.push_back( CashMovement(QTime(11,10), "Pessoa b", 200.00, CashMovement::Flow::outward, "Retirada") );
-    movements.push_back( CashMovement(QTime(11,30), "Pessoa c", 300.00, CashMovement::Flow::outward, "Retirada") );
-    movements.push_back( CashMovement(QTime(11,30), "Pessoa d", 600.10, CashMovement::Flow::inward, "Depósito") );
+    /*
+    movements.push_back( CashMovement(QString("Retirada"), QTime(11,00), 100.00, CashMovement::Flow::outward) );
+    movements.push_back( CashMovement(QString("Retirada"), QTime(11,10), 200.00, CashMovement::Flow::outward) );
+    movements.push_back( CashMovement(QString("Retirada"), QTime(11,30), 300.00, CashMovement::Flow::outward) );
+    movements.push_back( CashMovement(QString("Depósito"), QTime(11,30), 600.10, CashMovement::Flow::inward) );
+    */
 
     previous_period_cash = .0;
     total_sales = .0;
