@@ -13,7 +13,7 @@ class RelFechaCaixa
 public:
     RelFechaCaixa(const int id, const double prevPeriodCash)
     {
-        identifier = id;
+        this->identifier = id;
         this->previous_period_cash = prevPeriodCash; //TODO implementar uma classe friend que carrega essa informação
     }
 

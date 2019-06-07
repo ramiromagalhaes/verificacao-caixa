@@ -11,13 +11,11 @@ int main(int argc, char *argv[])
 
     DbServices db;
     std::vector<RelFechaCaixa> * reports = db.reports();
-    qDebug() << reports->size();
-    //RelFechaCaixa r = reports->at(0);
-
-    //r->load();
+    qDebug() << "Total relatorios " << reports->size();
+    RelFechaCaixa r = reports->at(0);
 
     MainWindow w;
-    //w.setModel(&r);
+    w.setModel(&r);
     w.updateView();
     w.show();
 

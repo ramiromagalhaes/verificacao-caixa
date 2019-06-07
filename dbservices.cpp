@@ -1,7 +1,9 @@
 #include "dbservices.h"
 
+#include <QString>
 #include <QDebug>
 #include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlDriver>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QVariant>
@@ -20,31 +22,24 @@ DbServices::DbServices()
 std::vector<RelFechaCaixa> * DbServices::reports()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("caixa.sqlite");
-
+    db.setDatabaseName("/home/ramiro/workspace/verificacao-caixa/caixa.sqlite");
     if ( !db.open() )
     {
-        qDebug() << db.lastError().text();
-    }
-    else
-    {
-        QSqlQuery query;
-        query.exec("SELECT * FROM CASHFLOW_REPORT");
-        qDebug() << "teste: " << query.size();
+        qDebug() << "Erro ao abrir o banco" << db.lastError().text();
     }
 
     QSqlQuery query;
-    query.exec(
+    const bool ok = query.exec(
                 "SELECT r.id, r.periodInit, r.periodEnd, r.cashier"
                 ", r.bills2, r.bills5, r.bills10, r.bills20, r.bills50, r.bills100"
                 ", r.cents1, r.cents5, r.cents10, r.cents25, r.cents50, r.cents100"
                 ", r.totalSales"
                 ", ro.totalCash as cashPreviousPeriod"
-                ", r.notes "
-                "FROM CASHFLOW_REPORT r"
-                "LEFT JOIN CASHFLOW_REPORT ro ON r.previousPeriodId = ro.id"
-                "ORDER BY r.periodInit DESC, r.periodEnd DESC"
-                "LIMIT 30");
+                ", r.notes"
+                " FROM CASHFLOW_REPORT r"
+                " LEFT JOIN CASHFLOW_REPORT ro ON r.previousPeriodId = ro.id"
+                " ORDER BY r.periodInit DESC, r.periodEnd DESC"
+                " LIMIT 30");
 
     std::vector<RelFechaCaixa> * result = new std::vector<RelFechaCaixa>();
     while ( query.next() )
