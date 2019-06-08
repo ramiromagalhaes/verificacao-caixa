@@ -510,17 +510,10 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="vendasDinheiroPeriodo">
-            <property name="text">
-             <string>R$ 0,00</string>
-            </property>
-           </widget>
-          </item>
           <item row="6" column="0">
            <widget class="QLabel" name="_label_29">
             <property name="text">
-             <string>Total esperado no caixa</string>
+             <string>(E) Total esperado no caixa (B+C+D)</string>
             </property>
            </widget>
           </item>
@@ -553,7 +546,7 @@
           <item row="7" column="0">
            <widget class="QLabel" name="_label_28">
             <property name="text">
-             <string>Diferença no caixa</string>
+             <string>(F) Diferença no caixa (A-E)</string>
             </property>
            </widget>
           </item>
@@ -567,7 +560,7 @@
           <item row="4" column="0">
            <widget class="QLabel" name="_label_21">
             <property name="text">
-             <string>Saldo de retiradas e depósitos</string>
+             <string>(C) Saldo de retiradas e depósitos</string>
             </property>
            </widget>
           </item>
@@ -587,21 +580,21 @@
           <item row="1" column="0">
            <widget class="QLabel" name="_label_19">
             <property name="text">
-             <string>Contagem de cédulas e moedas no caixa</string>
+             <string>(A) Contagem de cédulas e moedas no caixa</string>
             </property>
            </widget>
           </item>
           <item row="5" column="0">
            <widget class="QLabel" name="_label_27">
             <property name="text">
-             <string>Dinheiro no caixa no final do período anterior</string>
+             <string>(D) Dinheiro no caixa no final do período anterior</string>
             </property>
            </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="_label_25">
             <property name="text">
-             <string>Vendas em dinheiro deste período</string>
+             <string>(B) Vendas em dinheiro deste período</string>
             </property>
            </widget>
           </item>
@@ -609,6 +602,22 @@
            <widget class="QLabel" name="subtotalCaixa">
             <property name="text">
              <string>R$ 0,00</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="vendasDinheiroPeriodo">
+            <property name="inputMethodHints">
+             <set>Qt::ImhFormattedNumbersOnly</set>
+            </property>
+            <property name="inputMask">
+             <string>R$ 00000.99</string>
+            </property>
+            <property name="text">
+             <string>R$ 0.00</string>
+            </property>
+            <property name="maxLength">
+             <number>11</number>
             </property>
            </widget>
           </item>
@@ -799,7 +808,7 @@
      <x>0</x>
      <y>0</y>
      <width>977</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -1103,6 +1112,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>vendasDinheiroPeriodo</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>handleSalesChanged(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>606</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>309</x>
+     <y>609</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>spinR2Changed(int)</slot>
@@ -1123,5 +1148,6 @@
   <slot>handleFinish()</slot>
   <slot>handleCardReportChanged(int,int)</slot>
   <slot>handleNotesChanged()</slot>
+  <slot>handleSalesChanged(QString)</slot>
  </slots>
 </ui>

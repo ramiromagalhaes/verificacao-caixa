@@ -84,12 +84,12 @@ public:
 
     double expectedCash() const
     {
-        return previous_period_cash + total_sales - totalCashMovement();
+        return previous_period_cash + total_sales + totalCashMovement();
     }
 
     double cashDifference() const
     {
-        return expectedCash() - cash.getTotal();
+        return cash.getTotal() - expectedCash();
     }
 
 private:

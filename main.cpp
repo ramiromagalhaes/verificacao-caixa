@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include <QDebug>
 #include "dbservices.h"
 #include "relfechacaixa.h"
 
@@ -11,8 +10,7 @@ int main(int argc, char *argv[])
 
     DbServices db;
     std::vector<RelFechaCaixa> * reports = db.reports();
-    qDebug() << "Total relatorios " << reports->size();
-    RelFechaCaixa r = reports->at(0);
+    RelFechaCaixa r = reports->at(01);
 
     MainWindow w;
     w.setModel(&r);

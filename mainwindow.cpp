@@ -47,6 +47,7 @@ void MainWindow::updateView()
     for(std::vector<TotalCardSales>::const_iterator it = model->cards.begin(); it != model->cards.end(); ++it)
     {
         cardsTotals[it->m] += it->total;
+        qDebug() << it->fm << ' ' << it->m << ' ' << it->total;
         ui->tableCardsReport->setItem(it->m, it->fm,
                                         new QTableWidgetItem( QString::number(it->total, 'f', 2).prepend("R$ ") )
                                      );
@@ -91,7 +92,7 @@ void MainWindow::updateCashMovements()
         const int newRow = ui->tableDepositOrWithdraw->rowCount() - 1;
         ui->tableDepositOrWithdraw->setItem(newRow, 0, new QTableWidgetItem( it->when.toString(Qt::TextDate) ));
         ui->tableDepositOrWithdraw->setItem(newRow, 1, new QTableWidgetItem( it->responsible ));
-        ui->tableDepositOrWithdraw->setItem(newRow, 2, new QTableWidgetItem( QString::number(it->amount, 'f', 2).prepend("R$ ") ));
+        ui->tableDepositOrWithdraw->setItem(newRow, 2, new QTableWidgetItem( QString::number(it->amount * it->f, 'f', 2).prepend("R$ ") ));
         ui->tableDepositOrWithdraw->setItem(newRow, 3, new QTableWidgetItem( it->description ));
     }
 }
@@ -179,6 +180,11 @@ void MainWindow::handleRemoveCashMovent()
     qDebug() << ui->tableDepositOrWithdraw->selectedItems().at(0)->row();
     model->movements.erase(model->movements.begin() + ui->tableDepositOrWithdraw->selectedItems().at(0)->row());
     ui->tableDepositOrWithdraw->removeRow( ui->tableDepositOrWithdraw->selectedItems().at(0)->row() );
+}
+
+void MainWindow::handleSalesChanged(QString value)
+{
+//TODO
 }
 
 void MainWindow::handleSave()

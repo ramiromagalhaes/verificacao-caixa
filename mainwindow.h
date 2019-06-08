@@ -52,6 +52,8 @@ private slots:
     void handleAddCashMovent();
     void handleRemoveCashMovent();
 
+    void handleSalesChanged(QString);
+
     void handleCardReportChanged(int, int);
     void handleNotesChanged();
 
