@@ -6,13 +6,15 @@
 
 class DbServices
 {
+private:
+    DbServices() {}
+
 public:
-    DbServices();
+    static std::vector<RelFechaCaixa> * reports();
 
-    std::vector<RelFechaCaixa> * reports();
+    static void save(const RelFechaCaixa & report);
 
-    void save(const RelFechaCaixa & report);
-
+    static void finish(const RelFechaCaixa & report);
 };
 
 #endif // DBSERVICES_H

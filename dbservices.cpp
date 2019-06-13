@@ -14,11 +14,6 @@
 #include "totalcardsales.h"
 #include "cashmovement.h"
 
-DbServices::DbServices()
-{
-
-}
-
 std::vector<RelFechaCaixa> * DbServices::reports()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
