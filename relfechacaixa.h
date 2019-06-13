@@ -11,18 +11,12 @@
 class RelFechaCaixa
 {
 public:
-    RelFechaCaixa(const int id, const double prevPeriodCash)
-    {
-        this->identifier = id;
-        this->previous_period_cash = prevPeriodCash; //TODO implementar uma classe friend que carrega essa informação
-    }
+    RelFechaCaixa() {}
 
-    int getId() const
+    int id() const
     {
         return identifier;
     }
-
-    void load();
 
     /**
      * @brief period_init data e hora do início do período
@@ -33,6 +27,11 @@ public:
      * @brief period_end data e hora do dim do período
      */
     QDateTime period_end;
+
+    /**
+     * @brief indica se o relatório está concluído, portanto não deve ser alterado.
+     */
+    bool finished;
 
     /**
      * @brief cashier responsável pelo relatório
