@@ -2,7 +2,6 @@
 
 #include <QString>
 #include <QDebug>
-#include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
@@ -14,14 +13,22 @@
 #include "totalcardsales.h"
 #include "cashmovement.h"
 
-std::vector<RelFechaCaixa> * DbServices::reports()
+QSqlDatabase DbServices::open()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("/home/ramiro/workspace/verificacao-caixa/caixa.sqlite");
     if ( !db.open() )
     {
         qDebug() << "Erro ao abrir o banco" << db.lastError().text();
+        //TODO lançar exceção interrompendo tudo
     }
+
+    return db;
+}
+
+std::vector<RelFechaCaixa> * DbServices::reports()
+{
+    QSqlDatabase db = open();
 
     std::vector<RelFechaCaixa> * result = new std::vector<RelFechaCaixa>();
     {
@@ -112,6 +119,8 @@ std::vector<RelFechaCaixa> * DbServices::reports()
             it->movements.push_back(m);
         }
     }
+
+    db.close();
 
     return result;
 }
