@@ -15,8 +15,6 @@ public:
 
     }
 
-    void load();
-
     double getTotal() const       { return total;      }
     double getTotalBills() const  { return totalBills; }
     double getTotalCoins() const  { return totalCoins; }
