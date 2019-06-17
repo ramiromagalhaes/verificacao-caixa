@@ -12,7 +12,6 @@ public:
 
         bills2 = bills5 = bills10 = bills20 = bills50 = bills100 = cents1
                 = cents5 = cents10 = cents25 = cents50 =  cents100 = 0;
-
     }
 
     double getTotal() const       { return total;      }
