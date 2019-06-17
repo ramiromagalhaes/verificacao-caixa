@@ -16,8 +16,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void setModel(RelFechaCaixa *m) {
-        this->model = m;
+    void setModel(std::vector<RelFechaCaixa> * reports) {
+        this->reports = reports;
+        currentReport = this->reports->at(0);
     }
 
     void updateView();
@@ -27,7 +28,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    RelFechaCaixa *model;
+    std::vector<RelFechaCaixa> * reports;
+    RelFechaCaixa & currentReport;
 
     void updateTotalBills();
     void updateTotalCoins();

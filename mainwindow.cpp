@@ -12,39 +12,38 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete model;
     delete ui;
 }
 
 void MainWindow::updateView()
 {
-    ui->spinR2->setValue  ( model->cash.get2Bills()   );
-    ui->spinR5->setValue  ( model->cash.get5Bills()   );
-    ui->spinR10->setValue ( model->cash.get10Bills()  );
-    ui->spinR20->setValue ( model->cash.get20Bills()  );
-    ui->spinR50->setValue ( model->cash.get50Bills()  );
-    ui->spinR100->setValue( model->cash.get100Bills() );
-    ui->spinR001->setValue( model->cash.get1Cents()   );
-    ui->spinR005->setValue( model->cash.get5Cents()   );
-    ui->spinR010->setValue( model->cash.get10Cents()  );
-    ui->spinR025->setValue( model->cash.get25Cents()  );
-    ui->spinR050->setValue( model->cash.get50Cents()  );
-    ui->spinR1->setValue  ( model->cash.get100Cents() );
+    ui->spinR2->setValue  ( currentReport.cash.get2Bills()   );
+    ui->spinR5->setValue  ( currentReport.cash.get5Bills()   );
+    ui->spinR10->setValue ( currentReport.cash.get10Bills()  );
+    ui->spinR20->setValue ( currentReport.cash.get20Bills()  );
+    ui->spinR50->setValue ( currentReport.cash.get50Bills()  );
+    ui->spinR100->setValue( currentReport.cash.get100Bills() );
+    ui->spinR001->setValue( currentReport.cash.get1Cents()   );
+    ui->spinR005->setValue( currentReport.cash.get5Cents()   );
+    ui->spinR010->setValue( currentReport.cash.get10Cents()  );
+    ui->spinR025->setValue( currentReport.cash.get25Cents()  );
+    ui->spinR050->setValue( currentReport.cash.get50Cents()  );
+    ui->spinR1->setValue  ( currentReport.cash.get100Cents() );
 
     updateTotalBills();
     updateTotalCoins();
     updateTotalCash();
 
-    ui->totalMovimentos->setText       ( QString::number(model->totalCashMovement(), 'f', 2).prepend("R$ ")  );
-    ui->caixaPeriodoAnterior->setText  ( QString::number(model->previousPeriodCash(), 'f', 2).prepend("R$ ") );
-    ui->vendasDinheiroPeriodo->setText ( QString::number(model->total_sales, 'f', 2).prepend("R$ ")          );
-    ui->caixaEsperado->setText         ( QString::number(model->expectedCash(), 'f', 2).prepend("R$ ")       );
-    ui->diferencaCaixa->setText        ( QString::number(model->cashDifference(), 'f', 2).prepend("R$ ")     );
+    ui->totalMovimentos->setText       ( QString::number(currentReport.totalCashMovement(), 'f', 2).prepend("R$ ")  );
+    ui->caixaPeriodoAnterior->setText  ( QString::number(currentReport.previousPeriodCash(), 'f', 2).prepend("R$ ") );
+    ui->vendasDinheiroPeriodo->setText ( QString::number(currentReport.total_sales, 'f', 2).prepend("R$ ")          );
+    ui->caixaEsperado->setText         ( QString::number(currentReport.expectedCash(), 'f', 2).prepend("R$ ")       );
+    ui->diferencaCaixa->setText        ( QString::number(currentReport.cashDifference(), 'f', 2).prepend("R$ ")     );
 
     updateCashMovements();
 
     double cardsTotals[2] = {.0, .0};
-    for(std::vector<TotalCardSales>::const_iterator it = model->cards.begin(); it != model->cards.end(); ++it)
+    for(std::vector<TotalCardSales>::const_iterator it = currentReport.cards.begin(); it != currentReport.cards.end(); ++it)
     {
         cardsTotals[it->m] += it->total;
         qDebug() << it->fm << ' ' << it->m << ' ' << it->total;
@@ -56,7 +55,7 @@ void MainWindow::updateView()
     ui->tableCardsReport->setItem(1, 0, new QTableWidgetItem( QString::number(cardsTotals[1], 'f', 2).prepend("R$ ") ));
 
 
-    ui->txtNotes->setPlainText( model->notes );
+    ui->txtNotes->setPlainText( currentReport.notes );
 }
 
 void MainWindow::addCashMovent()
@@ -66,26 +65,26 @@ void MainWindow::addCashMovent()
 
 void MainWindow::updateTotalBills()
 {
-    ui->labelTotalBills->setText( QString::number(model->cash.getTotalBills(), 'f', 2).prepend("R$ ") );
+    ui->labelTotalBills->setText( QString::number(currentReport.cash.getTotalBills(), 'f', 2).prepend("R$ ") );
     updateTotalCash();
 }
 
 void MainWindow::updateTotalCoins()
 {
-    ui->labelTotalCoins->setText( QString::number(model->cash.getTotalCoins(), 'f', 2).prepend("R$ ") );
+    ui->labelTotalCoins->setText( QString::number(currentReport.cash.getTotalCoins(), 'f', 2).prepend("R$ ") );
     updateTotalCash();
 }
 
 void MainWindow::updateTotalCash()
 {
-    ui->subtotalCaixa->setText( QString::number(model->cash.getTotal(), 'f', 2).prepend("R$ ") );
+    ui->subtotalCaixa->setText( QString::number(currentReport.cash.getTotal(), 'f', 2).prepend("R$ ") );
 }
 
 void MainWindow::updateCashMovements()
 {
     ui->tableDepositOrWithdraw->clearContents();
 
-    for(std::vector<CashMovement>::const_iterator it = model->movements.begin(); it != model->movements.end(); ++it)
+    for(std::vector<CashMovement>::const_iterator it = currentReport.movements.begin(); it != currentReport.movements.end(); ++it)
     {
         ui->tableDepositOrWithdraw->insertRow(ui->tableDepositOrWithdraw->rowCount());
 
@@ -99,86 +98,86 @@ void MainWindow::updateCashMovements()
 
 void MainWindow::spinR2Changed(int v)
 {
-    model->cash.set2Bills(v);
+    currentReport.cash.set2Bills(v);
     updateTotalBills();
 }
 
 void MainWindow::spinR5Changed(int v)
 {
-    model->cash.set5Bills(v);
+    currentReport.cash.set5Bills(v);
     updateTotalBills();
 }
 
 void MainWindow::spinR10Changed(int v)
 {
-    model->cash.set10Bills(v);
+    currentReport.cash.set10Bills(v);
     updateTotalBills();
 }
 
 void MainWindow::spinR20Changed(int v)
 {
-    model->cash.set20Bills(v);
+    currentReport.cash.set20Bills(v);
     updateTotalBills();
 }
 
 void MainWindow::spinR50Changed(int v)
 {
-    model->cash.set50Bills(v);
+    currentReport.cash.set50Bills(v);
     updateTotalBills();
 }
 
 void MainWindow::spinR100Changed(int v)
 {
-    model->cash.set100Bills(v);
+    currentReport.cash.set100Bills(v);
     updateTotalBills();
 }
 
 void MainWindow::spinR001Changed(int v)
 {
-    model->cash.set1Cents(v);
+    currentReport.cash.set1Cents(v);
     updateTotalCoins();
 }
 
 void MainWindow::spinR005Changed(int v)
 {
-    model->cash.set5Cents(v);
+    currentReport.cash.set5Cents(v);
     updateTotalCoins();
 }
 
 void MainWindow::spinR010Changed(int v)
 {
-    model->cash.set10Cents(v);
+    currentReport.cash.set10Cents(v);
     updateTotalCoins();
 }
 
 void MainWindow::spinR025Changed(int v)
 {
-    model->cash.set25Cents(v);
+    currentReport.cash.set25Cents(v);
     updateTotalCoins();
 }
 
 void MainWindow::spinR050Changed(int v)
 {
-    model->cash.set50Cents(v);
+    currentReport.cash.set50Cents(v);
     updateTotalCoins();
 }
 
 void MainWindow::spinR1Changed(int v)
 {
-    model->cash.set100Cents(v);
+    currentReport.cash.set100Cents(v);
     updateTotalCoins();
 }
 
 void MainWindow::handleAddCashMovent()
 {
-    model->movements.push_back( CashMovement(QTime::currentTime(), "", .0, CashMovement::Flow::inward, "") );
+    currentReport.movements.push_back( CashMovement(QTime::currentTime(), "", .0, CashMovement::Flow::inward, "") );
     ui->tableDepositOrWithdraw->insertRow( ui->tableDepositOrWithdraw->rowCount() );
 }
 
 void MainWindow::handleRemoveCashMovent()
 {
     qDebug() << ui->tableDepositOrWithdraw->selectedItems().at(0)->row();
-    model->movements.erase(model->movements.begin() + ui->tableDepositOrWithdraw->selectedItems().at(0)->row());
+    currentReport.movements.erase(currentReport.movements.begin() + ui->tableDepositOrWithdraw->selectedItems().at(0)->row());
     ui->tableDepositOrWithdraw->removeRow( ui->tableDepositOrWithdraw->selectedItems().at(0)->row() );
 }
 
@@ -204,5 +203,5 @@ void MainWindow::handleCardReportChanged(int x,int y)
 
 void MainWindow::handleNotesChanged()
 {
-    model->notes = ui->txtNotes->toPlainText();
+    currentReport.notes = ui->txtNotes->toPlainText();
 }

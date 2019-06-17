@@ -13,10 +13,10 @@ class RelFechaCaixa
 public:
     RelFechaCaixa() {}
 
-    int id() const
-    {
-        return identifier;
-    }
+    /**
+     * @brief identifier id do período no banco de dados
+     */
+    int identifier;
 
     /**
      * @brief period_init data e hora do início do período
@@ -29,9 +29,9 @@ public:
     QDateTime period_end;
 
     /**
-     * @brief indica se o relatório está concluído, portanto não deve ser alterado.
+     * @brief previous_period_cash total de dinheiro no caixa do período anterior
      */
-    bool finished;
+    double previous_period_cash = .0;
 
     /**
      * @brief cashier responsável pelo relatório
@@ -51,7 +51,7 @@ public:
     /**
      * @brief total_sales vendas em dinheiro neste período
      */
-    double total_sales;
+    double total_sales = .0;
 
     /**
      * @brief cards relatório de vendas em cartão
@@ -65,6 +65,15 @@ public:
      */
     QString notes;
 
+    /**
+     * @brief indica se o relatório está concluído, portanto não deve ser alterado.
+     */
+    bool finished = false;
+
+    /**
+     * @brief totalCashMovement Soma todos os valores registrados em this.movements;
+     * @return o somatório de dinheiro movimentado.
+     */
     double totalCashMovement() const
     {
         double total = .0;
@@ -76,32 +85,23 @@ public:
         return total;
     }
 
-    double previousPeriodCash() const
-    {
-        return previous_period_cash;
-    }
-
+    /**
+     * @brief expectedCash o total de dinheiro esperado no caixa no final do período deste relatório.
+     * @return o dinheiro no final do período anterior mais o total de vendas deste período mais #totalCashMovement()
+     */
     double expectedCash() const
     {
         return previous_period_cash + total_sales + totalCashMovement();
     }
 
+    /**
+     * @brief cashDifference a diferença entre o total de dinheiro no caixa e o valor esperado.
+     * @return o total de dinheiro no caixa menos o total de dinheiro esperado no caixa.
+     */
     double cashDifference() const
     {
         return cash.getTotal() - expectedCash();
     }
-
-private:
-
-    /**
-     * @brief identifier id do período no banco de dados
-     */
-    int identifier;
-
-    /**
-     * @brief previous_period_cash total de dinheiro no caixa do período anterior
-     */
-    double previous_period_cash;
 
 };
 

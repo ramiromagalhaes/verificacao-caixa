@@ -5,14 +5,7 @@
 class CashPurse
 {
 public:
-    CashPurse() {
-        total = 0.0;
-        totalBills = 0.0;
-        totalCoins = 0.0;
-
-        bills2 = bills5 = bills10 = bills20 = bills50 = bills100 = cents1
-                = cents5 = cents10 = cents25 = cents50 =  cents100 = 0;
-    }
+    CashPurse() {}
 
     double getTotal() const       { return total;      }
     double getTotalBills() const  { return totalBills; }
@@ -54,9 +47,9 @@ private:
         total = totalBills + totalCoins;
     }
 
-    double total = 0.0;
-    double totalBills = 0.0;
-    double totalCoins = 0.0;
+    double total = .0;
+    double totalBills = .0;
+    double totalCoins = .0;
 
     int bills2 = 0, bills5 = 0, bills10 = 0, bills20 = 0, bills50 = 0, bills100 = 0,
         cents1 = 0, cents5 = 0, cents10 = 0, cents25 = 0, cents50 = 0, cents100 = 0;

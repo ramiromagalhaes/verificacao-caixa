@@ -7,13 +7,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-
-    DbServices db;
-    std::vector<RelFechaCaixa> * reports = db.reports();
-    RelFechaCaixa r = reports->at(01);
+    std::vector<RelFechaCaixa> * reports = DbServices::reports();
 
     MainWindow w;
-    w.setModel(&r);
+    w.setModel(reports);
     w.updateView();
     w.show();
 

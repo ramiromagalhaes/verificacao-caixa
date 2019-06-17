@@ -26,9 +26,17 @@ public:
         TEF = 1
     };
 
-    TotalCardSales(const FlagAndMode fm, const Machine m, const double total);
+    TotalCardSales(const FlagAndMode fm, const Machine m, const double total)
+        : fm(fm), m(m), total(total) {}
 
-    TotalCardSales & operator=(TotalCardSales const & cardSales);
+    TotalCardSales & operator=(TotalCardSales const & cardSales)
+    {
+        this->fm = cardSales.fm;
+        this->m = cardSales.m;
+        this->total = cardSales.total;
+
+        return *this;
+    }
 
     FlagAndMode fm;
     Machine m;
