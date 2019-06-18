@@ -35,7 +35,7 @@ void MainWindow::updateView()
     updateTotalCash();
 
     ui->totalMovimentos->setText       ( QString::number(currentReport.totalCashMovement(), 'f', 2).prepend("R$ ")  );
-    ui->caixaPeriodoAnterior->setText  ( QString::number(currentReport.previousPeriodCash(), 'f', 2).prepend("R$ ") );
+    ui->caixaPeriodoAnterior->setText  ( QString::number(currentReport.previous_period_cash, 'f', 2).prepend("R$ ") );
     ui->vendasDinheiroPeriodo->setText ( QString::number(currentReport.total_sales, 'f', 2).prepend("R$ ")          );
     ui->caixaEsperado->setText         ( QString::number(currentReport.expectedCash(), 'f', 2).prepend("R$ ")       );
     ui->diferencaCaixa->setText        ( QString::number(currentReport.cashDifference(), 'f', 2).prepend("R$ ")     );

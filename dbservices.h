@@ -10,7 +10,7 @@ class DbServices
 private:
     DbServices() {}
 
-    QSqlDatabase open();
+    static QSqlDatabase open();
 
 public:
     static std::vector<RelFechaCaixa> * reports();

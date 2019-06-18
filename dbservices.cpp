@@ -2,6 +2,7 @@
 
 #include <QString>
 #include <QDebug>
+#include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
@@ -47,7 +48,9 @@ std::vector<RelFechaCaixa> * DbServices::reports()
 
         while ( query.next() )
         {
-            RelFechaCaixa r( query.value("id").toInt(), query.value("cashPreviousPeriod").toDouble() );
+            RelFechaCaixa r;
+            r.identifier = query.value("id").toInt();
+            r.previous_period_cash = query.value("cashPreviousPeriod").toDouble();
 
             r.period_init = QDateTime::fromMSecsSinceEpoch( query.value("periodInit").toInt() );
             r.period_end = QDateTime::fromMSecsSinceEpoch( query.value("periodEnd").toInt() );
@@ -84,7 +87,7 @@ std::vector<RelFechaCaixa> * DbServices::reports()
                     " FROM CARDS_REPORT"
                     " WHERE reportId = :id"
                     " ORDER BY flagAndMode, machine");
-        query.bindValue(":id", it->getId());
+        query.bindValue(":id", it->identifier);
         query.exec();
         while( query.next() )
         {
@@ -104,7 +107,7 @@ std::vector<RelFechaCaixa> * DbServices::reports()
                       " FROM MOVEMENT "
                       " WHERE reportId = :id "
                       " ORDER BY movementTime, responsible, amount");
-        query.bindValue(":id", it->getId());
+        query.bindValue(":id", it->identifier);
         query.exec();
         while( query.next() )
         {

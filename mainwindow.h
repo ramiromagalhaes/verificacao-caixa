@@ -29,7 +29,7 @@ private:
     Ui::MainWindow *ui;
 
     std::vector<RelFechaCaixa> * reports;
-    RelFechaCaixa & currentReport;
+    RelFechaCaixa currentReport;
 
     void updateTotalBills();
     void updateTotalCoins();
