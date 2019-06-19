@@ -7,9 +7,9 @@ class CashPurse
 public:
     CashPurse() {}
 
-    double getTotal() const       { return total;      }
-    double getTotalBills() const  { return totalBills; }
-    double getTotalCoins() const  { return totalCoins; }
+    double getTotal()      const { return total;      }
+    double getTotalBills() const { return totalBills; }
+    double getTotalCoins() const { return totalCoins; }
 
     int get2Bills   () const { return bills2;   }
     int get5Bills   () const { return bills5;   }
