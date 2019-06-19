@@ -25,16 +25,6 @@ public:
         return amount * f;
     }
 
-    CashMovement & operator=(CashMovement const & movement){
-        this->when = movement.when;
-        this->responsible = movement.responsible;
-        this->amount = movement.amount;
-        this->f = movement.f;
-        this->description = movement.description;
-
-        return *this;
-    }
-
     QTime when;
     QString responsible;
     double amount;
