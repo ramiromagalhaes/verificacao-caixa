@@ -4,6 +4,8 @@
 #include <vector>
 #include <QDateTime>
 
+#include <QString>
+
 #include <cashpurse.h>
 #include <cashmovement.h>
 #include <totalcardsales.h>
@@ -12,6 +14,13 @@ class RelFechaCaixa
 {
 public:
     RelFechaCaixa() {}
+
+    RelFechaCaixa (QString cashier,
+                   QDateTime periodInit = QDateTime::currentDateTime(),
+                   double previousPeriodCash) :
+        cashier(cashier),
+        period_init(periodInit),
+        previous_period_cash(previousPeriodCash) {};
 
     /**
      * @brief identifier id do período no banco de dados

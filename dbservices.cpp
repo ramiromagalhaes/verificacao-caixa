@@ -130,5 +130,69 @@ std::vector<RelFechaCaixa> * DbServices::reports()
 
 void DbServices::save(const RelFechaCaixa & report)
 {
+    QSqlDatabase db = open();
 
+    bool isNewReport = false;
+
+    {
+        QSqlQuery reportExists;
+        reportExists.exec("SELECT count(id) FROM CASHFLOW_REPORT WHERE id = :id");
+        reportExists.next();
+        isNewReport = reportExists.value(0).toInt() == 0;
+    }
+
+    if ( isNewReport ) {
+        //cria o registro
+        QSqlQuery insert;
+        insert.exec("INSERT INTO CASHFLOW_REPORT (finished) VALUES (0)");
+        report.identifier = insert.lastInsertId().toInt();
+    }
+
+    //atualiza o registro
+    QSqlQuery update;
+    update.prepare("UPDATE CASHFLOW_REPORT SET"
+                " periodInit = :periodInit,"
+                " periodEnd = :periodEnd,"
+                " cashier = :cashier,"
+                " previousPeriodId = :previousPeriodId,"
+                " bills2 = :bills2,"
+                " bills5 = :bills5,"
+                " bills10 = :bills10,"
+                " bills20 = :bills20,"
+                " bills50 = :bills50,"
+                " bills100 = :bills100,"
+                " cents1 = :cents1,"
+                " cents5 = :cents5,"
+                " cents10 = :cents10,"
+                " cents25 = :cents25,"
+                " cents50 = :cents50,"
+                " cents100 = :cents100,"
+                " totalSales = :totalSales,"
+                " totalCash = :totalCash,"
+                " notes = :notes,"
+                " finished = 0"
+                " WHERE id = :id");
+
+    update.bindValue("periodInit", report.period_init);
+    update.bindValue("periodEnd", report.period_end);
+    update.bindValue("cashier", report.cashier);
+    //update.bindValue("previousPeriodId", report.);
+    update.bindValue("bills2", report.cash.get2Bills());
+    update.bindValue("bills5", report.cash.get5Bills());
+    update.bindValue("bills10", report.cash.get10Bills());
+    update.bindValue("bills20", report.cash.get20Bills());
+    update.bindValue("bills50", report.cash.get50Bills());
+    update.bindValue("bills100", report.cash.get100Bills());
+    update.bindValue("cents1", report.cash.get1Cents());
+    update.bindValue("cents5", report.cash.get5Cents());
+    update.bindValue("cents10", report.cash.get10Cents());
+    update.bindValue("cents25", report.cash.get25Cents());
+    update.bindValue("cents50", report.cash.get50Cents());
+    update.bindValue("cents100", report.cash.get100Cents());
+    update.bindValue("totalSales", report.total_sales);
+    //update.bindValue("totalCash", report.);
+    update.bindValue("notes", report.notes);
+    update.bindValue("id", report.identifier);
+
+    update.exec();
 }
