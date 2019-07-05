@@ -15,6 +15,10 @@ private:
 public:
     static std::vector<RelFechaCaixa> * reports();
 
+    static RelFechaCaixa create(QString cashier,
+                                double previousPeriodCash = .0,
+                                QDateTime periodInit = QDateTime::currentDateTime());
+
     static void save(const RelFechaCaixa & report);
 
     static void finish(const RelFechaCaixa & report);

@@ -16,16 +16,26 @@ public:
     RelFechaCaixa() {}
 
     RelFechaCaixa (QString cashier,
-                   QDateTime periodInit = QDateTime::currentDateTime(),
-                   double previousPeriodCash) :
+                   double previousPeriodCash = .0,
+                   QDateTime periodInit = QDateTime::currentDateTime()) :
         cashier(cashier),
-        period_init(periodInit),
-        previous_period_cash(previousPeriodCash) {};
+        previous_period_cash(previousPeriodCash),
+        period_init(periodInit) {}
 
     /**
      * @brief identifier id do período no banco de dados
      */
     int identifier;
+
+    /**
+     * @brief cashier responsável pelo relatório
+     */
+    QString cashier;
+
+    /**
+     * @brief previous_period_cash total de dinheiro no caixa do período anterior
+     */
+    double previous_period_cash;
 
     /**
      * @brief period_init data e hora do início do período
@@ -36,16 +46,6 @@ public:
      * @brief period_end data e hora do dim do período
      */
     QDateTime period_end;
-
-    /**
-     * @brief previous_period_cash total de dinheiro no caixa do período anterior
-     */
-    double previous_period_cash = .0;
-
-    /**
-     * @brief cashier responsável pelo relatório
-     */
-    QString cashier;
 
     /**
      * @brief cash contagem de dinheiro no caixa

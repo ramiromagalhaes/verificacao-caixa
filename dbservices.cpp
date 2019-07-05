@@ -128,6 +128,22 @@ std::vector<RelFechaCaixa> * DbServices::reports()
     return result;
 }
 
+static RelFechaCaixa create(QString cashier,
+                            QDateTime periodInit = QDateTime::currentDateTime())
+{
+    QSqlDatabase db = open();
+
+    //Qual é o relatório anterior a esse?
+
+    if ( isNewReport ) {
+        //cria o registro
+        QSqlQuery insert;
+        insert.exec("INSERT INTO CASHFLOW_REPORT (finished) VALUES (0)");
+        report.identifier = insert.lastInsertId().toInt();
+    }
+
+}
+
 void DbServices::save(const RelFechaCaixa & report)
 {
     QSqlDatabase db = open();
@@ -154,7 +170,6 @@ void DbServices::save(const RelFechaCaixa & report)
                 " periodInit = :periodInit,"
                 " periodEnd = :periodEnd,"
                 " cashier = :cashier,"
-                " previousPeriodId = :previousPeriodId,"
                 " bills2 = :bills2,"
                 " bills5 = :bills5,"
                 " bills10 = :bills10,"
@@ -176,7 +191,6 @@ void DbServices::save(const RelFechaCaixa & report)
     update.bindValue("periodInit", report.period_init);
     update.bindValue("periodEnd", report.period_end);
     update.bindValue("cashier", report.cashier);
-    //update.bindValue("previousPeriodId", report.);
     update.bindValue("bills2", report.cash.get2Bills());
     update.bindValue("bills5", report.cash.get5Bills());
     update.bindValue("bills10", report.cash.get10Bills());
@@ -190,9 +204,17 @@ void DbServices::save(const RelFechaCaixa & report)
     update.bindValue("cents50", report.cash.get50Cents());
     update.bindValue("cents100", report.cash.get100Cents());
     update.bindValue("totalSales", report.total_sales);
-    //update.bindValue("totalCash", report.);
+    update.bindValue("totalCash", report.cash.getTotal());
     update.bindValue("notes", report.notes);
     update.bindValue("id", report.identifier);
 
+    update.exec();
+}
+
+void DbServices::finish(const RelFechaCaixa & report)
+{
+    QSqlQuery update;
+    update.prepare("UPDATE CASHFLOW_REPORT SET finished = 1 WHERE ID = :id");
+    update.bindValue("id", report.identifier);
     update.exec();
 }

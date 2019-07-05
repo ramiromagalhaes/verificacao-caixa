@@ -25,13 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dbservices.cpp
+    dbservices.cpp \
+    relatorioaberturacaixa.cpp
 
 HEADERS  += mainwindow.h \
     cashpurse.h \
     relfechacaixa.h \
     cashmovement.h \
     totalcardsales.h \
-    dbservices.h
+    dbservices.h \
+    relatorioaberturacaixa.h
 
 FORMS    += mainwindow.ui
